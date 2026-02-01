@@ -8,98 +8,163 @@
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     
-    body {
-      font-family: 'Cinzel', serif;
-      background: linear-gradient(145deg, #3d2b1f 0%, #5c4033 50%, #4a3728 100%);
-      min-height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
+    html, body {
+      width: 100%;
+      height: 100%;
       overflow: hidden;
     }
     
-    .wood-texture {
+    body {
+      font-family: 'Cinzel', serif;
+      background: #4a3728;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    
+    /* Wood grain background */
+    .wood-bg {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      pointer-events: none;
-      opacity: 0.1;
-      background-image: 
+      background: 
         repeating-linear-gradient(
-          90deg,
-          transparent,
+          95deg,
+          transparent 0px,
           transparent 2px,
           rgba(0,0,0,0.03) 2px,
-          rgba(0,0,0,0.03) 4px
+          rgba(0,0,0,0.05) 4px,
+          transparent 4px,
+          transparent 8px
+        ),
+        repeating-linear-gradient(
+          87deg,
+          transparent 0px,
+          rgba(60,40,25,0.1) 20px,
+          transparent 40px
+        ),
+        repeating-linear-gradient(
+          92deg,
+          rgba(80,55,35,0.15) 0px,
+          transparent 3px,
+          rgba(50,35,20,0.1) 6px,
+          transparent 12px
+        ),
+        linear-gradient(180deg, 
+          #5c4033 0%, 
+          #4a3525 20%,
+          #5a4030 40%,
+          #4d3828 60%,
+          #563d2d 80%,
+          #4a3525 100%
         );
     }
     
     .container {
       text-align: center;
-      padding: 40px 50px;
-      background: linear-gradient(145deg, #d4c4a8 0%, #c4b393 50%, #b8a882 100%);
-      border-radius: 15px;
-      border: 3px solid #8b7355;
-      box-shadow: 
-        0 8px 32px rgba(0,0,0,0.4),
-        inset 0 2px 4px rgba(255,255,255,0.2),
-        inset 0 -2px 4px rgba(0,0,0,0.1);
+      padding: 25px 35px;
+      width: 90%;
+      max-width: 420px;
       position: relative;
-      min-width: 320px;
+      background: 
+        repeating-linear-gradient(
+          93deg,
+          transparent 0px,
+          transparent 1px,
+          rgba(139,115,85,0.08) 1px,
+          rgba(139,115,85,0.08) 2px,
+          transparent 2px,
+          transparent 6px
+        ),
+        repeating-linear-gradient(
+          88deg,
+          transparent 0px,
+          rgba(160,140,110,0.1) 15px,
+          transparent 30px
+        ),
+        repeating-linear-gradient(
+          91deg,
+          rgba(180,160,130,0.12) 0px,
+          transparent 2px,
+          rgba(150,130,100,0.08) 4px,
+          transparent 10px
+        ),
+        linear-gradient(175deg, 
+          #d9ccb4 0%, 
+          #cfc2a8 15%,
+          #d5c8b0 30%,
+          #c9bca4 50%,
+          #d2c5ad 70%,
+          #c6b99f 85%,
+          #cbbea6 100%
+        );
+      border-radius: 12px;
+      border: 3px solid #6d5a45;
+      box-shadow: 
+        inset 2px 2px 6px rgba(0,0,0,0.15),
+        inset -1px -1px 4px rgba(255,255,255,0.1),
+        4px 4px 15px rgba(0,0,0,0.4);
     }
     
     .container::before {
       content: "";
       position: absolute;
-      top: 10px;
-      left: 10px;
-      right: 10px;
-      bottom: 10px;
-      border: 1px solid rgba(139, 115, 85, 0.3);
-      border-radius: 10px;
+      top: 8px;
+      left: 8px;
+      right: 8px;
+      bottom: 8px;
+      border: 1px solid rgba(109, 90, 69, 0.25);
+      border-radius: 8px;
       pointer-events: none;
     }
     
     .mode-tabs {
       display: flex;
       justify-content: center;
-      gap: 12px;
-      margin-bottom: 30px;
+      gap: 10px;
+      margin-bottom: 20px;
     }
     
     .tab {
-      background: rgba(139, 115, 85, 0.2);
-      border: 1px solid #8b7355;
-      color: #5c4033;
-      padding: 10px 20px;
+      background: 
+        linear-gradient(180deg, rgba(109,90,69,0.3) 0%, rgba(92,74,56,0.4) 100%);
+      border: 1px solid #6d5a45;
+      color: #4a3525;
+      padding: 8px 16px;
       cursor: pointer;
       font-family: 'Cinzel', serif;
-      font-size: 0.85em;
-      border-radius: 6px;
+      font-size: 0.8em;
+      border-radius: 5px;
       transition: all 0.3s;
       font-weight: 600;
     }
     
     .tab:hover {
-      background: rgba(30, 80, 50, 0.15);
+      background: linear-gradient(180deg, rgba(30,80,50,0.25) 0%, rgba(26,71,42,0.35) 100%);
       border-color: #1e5032;
-      color: #1e5032;
+      color: #1a472a;
     }
     
     .tab.active {
-      background: linear-gradient(135deg, #1e5032 0%, #2a623d 50%, #1a472a 100%);
-      border-color: #aaa78c;
-      color: #aaa78c;
-      box-shadow: 0 4px 12px rgba(30, 80, 50, 0.4);
+      background: 
+        repeating-linear-gradient(
+          90deg,
+          rgba(30,80,50,0.9) 0px,
+          rgba(42,98,61,0.9) 1px,
+          rgba(26,71,42,0.95) 2px
+        ),
+        linear-gradient(180deg, #1e5032 0%, #1a472a 100%);
+      border-color: #8b7355;
+      color: #c9bda3;
+      box-shadow: inset 1px 1px 3px rgba(0,0,0,0.3);
     }
     
     .display {
-      font-size: 3.5em;
+      font-size: 3em;
       color: #3d2b1f;
-      text-shadow: 1px 1px 2px rgba(255,255,255,0.3);
-      margin: 20px 0;
+      margin: 15px 0;
       font-weight: 700;
       letter-spacing: 2px;
     }
@@ -107,42 +172,51 @@
     .controls {
       display: flex;
       justify-content: center;
-      gap: 15px;
-      margin-top: 20px;
-    }
-    
-    .btn {
-      background: linear-gradient(145deg, #8b7355 0%, #6d5a45 100%);
-      border: 1px solid #5c4033;
-      color: #f5f0e6;
-      padding: 12px 28px;
-      cursor: pointer;
-      font-family: 'Cinzel', serif;
-      font-size: 0.9em;
-      border-radius: 8px;
-      transition: all 0.3s;
-      font-weight: 600;
-    }
-    
-    .btn:hover {
-      background: linear-gradient(135deg, #1e5032 0%, #2a623d 100%);
-      border-color: #1a472a;
-      box-shadow: 0 4px 15px rgba(30, 80, 50, 0.4);
-    }
-    
-    .btn:disabled {
-      opacity: 0.5;
-      cursor: not-allowed;
-    }
-    
-    .pomodoro-info {
-      color: #5c4033;
-      font-size: 0.9em;
+      gap: 12px;
       margin-top: 15px;
     }
     
+    .btn {
+      background: 
+        repeating-linear-gradient(
+          92deg,
+          rgba(139,115,85,0.9) 0px,
+          rgba(109,90,69,0.95) 1px,
+          rgba(92,64,51,0.9) 2px
+        ),
+        linear-gradient(180deg, #7d654d 0%, #5c4a38 100%);
+      border: 1px solid #4a3525;
+      color: #f0e8d8;
+      padding: 10px 22px;
+      cursor: pointer;
+      font-family: 'Cinzel', serif;
+      font-size: 0.85em;
+      border-radius: 6px;
+      transition: all 0.3s;
+      font-weight: 600;
+      box-shadow: inset 1px 1px 2px rgba(255,255,255,0.1);
+    }
+    
+    .btn:hover {
+      background: 
+        repeating-linear-gradient(
+          90deg,
+          rgba(30,80,50,0.9) 0px,
+          rgba(42,98,61,0.9) 1px,
+          rgba(26,71,42,0.95) 2px
+        ),
+        linear-gradient(180deg, #1e5032 0%, #1a472a 100%);
+      border-color: #0d2818;
+    }
+    
+    .pomodoro-info {
+      color: #4a3525;
+      font-size: 0.85em;
+      margin-top: 12px;
+    }
+    
     .pomodoro-info span {
-      color: #1e5032;
+      color: #1a472a;
       font-weight: 700;
     }
     
@@ -151,7 +225,7 @@
   </style>
 </head>
 <body>
-  <div class="wood-texture"></div>
+  <div class="wood-bg"></div>
   
   <div class="container">
     <div class="mode-tabs">
@@ -160,12 +234,10 @@
       <button class="tab" onclick="switchMode('stopwatch')">Stopwatch</button>
     </div>
     
-    <!-- Clock Mode -->
     <div id="clock-panel" class="mode-panel active">
       <div class="display" id="clock-display">00:00:00</div>
     </div>
     
-    <!-- Pomodoro Mode -->
     <div id="pomodoro-panel" class="mode-panel">
       <div class="display" id="pomodoro-display">25:00</div>
       <div class="controls">
@@ -177,7 +249,6 @@
       </div>
     </div>
     
-    <!-- Stopwatch Mode -->
     <div id="stopwatch-panel" class="mode-panel">
       <div class="display" id="stopwatch-display">00:00:00</div>
       <div class="controls">
@@ -188,35 +259,26 @@
   </div>
 
   <script>
-    // Mode Switching
     function switchMode(mode) {
       document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
       document.querySelectorAll('.mode-panel').forEach(p => p.classList.remove('active'));
-      
       event.target.classList.add('active');
       document.getElementById(mode + '-panel').classList.add('active');
     }
     
-    // Clock
     function updateClock() {
       const now = new Date();
-      const time = now.toTimeString().split(' ')[0];
-      document.getElementById('clock-display').textContent = time;
+      document.getElementById('clock-display').textContent = now.toTimeString().split(' ')[0];
     }
     setInterval(updateClock, 1000);
     updateClock();
     
-    // Pomodoro
-    let pomoTime = 25 * 60;
-    let pomoInterval = null;
-    let pomoRunning = false;
-    let isWork = true;
-    let pomoCount = 0;
+    let pomoTime = 25 * 60, pomoInterval = null, pomoRunning = false, isWork = true, pomoCount = 0;
     
     function updatePomoDisplay() {
-      const mins = Math.floor(pomoTime / 60).toString().padStart(2, '0');
-      const secs = (pomoTime % 60).toString().padStart(2, '0');
-      document.getElementById('pomodoro-display').textContent = `${mins}:${secs}`;
+      const m = Math.floor(pomoTime / 60).toString().padStart(2, '0');
+      const s = (pomoTime % 60).toString().padStart(2, '0');
+      document.getElementById('pomodoro-display').textContent = `${m}:${s}`;
     }
     
     function startPomodoro() {
@@ -229,21 +291,14 @@
           updatePomoDisplay();
           if (pomoTime <= 0) {
             clearInterval(pomoInterval);
-            if (isWork) {
-              pomoCount++;
-              document.getElementById('pomo-count').textContent = pomoCount;
-              pomoTime = 5 * 60;
-              isWork = false;
-              document.getElementById('pomo-session').textContent = 'Break';
-            } else {
-              pomoTime = 25 * 60;
-              isWork = true;
-              document.getElementById('pomo-session').textContent = 'Work';
-            }
+            pomoCount += isWork ? 1 : 0;
+            document.getElementById('pomo-count').textContent = pomoCount;
+            pomoTime = isWork ? 5 * 60 : 25 * 60;
+            isWork = !isWork;
+            document.getElementById('pomo-session').textContent = isWork ? 'Work' : 'Break';
             updatePomoDisplay();
             pomoRunning = false;
             document.getElementById('pomo-start').textContent = 'Start';
-            new Audio('data:audio/wav;base64,UklGRnoGAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQoGAACBhYqFbF1fdH2Onp6agHBkXGR2h5eem4x7bmZlbHqHj5KRi4F5c3BxeIGHioqHgXt3dXZ5fYGEhYSDgH17e3t8foCCg4OCgYB/fn19fn+AgYKCgoGAf39+fn5/gIGBgYGAgH9/f39/gICAgICAgIB/f39/f4CAgICAgICAf39/f3+AgICAgICAgH9/f39/gICAgA==').play().catch(()=>{});
           }
         }, 1000);
         document.getElementById('pomo-start').textContent = 'Pause';
@@ -261,16 +316,13 @@
       document.getElementById('pomo-session').textContent = 'Work';
     }
     
-    // Stopwatch
-    let swTime = 0;
-    let swInterval = null;
-    let swRunning = false;
+    let swTime = 0, swInterval = null, swRunning = false;
     
     function updateSwDisplay() {
-      const hrs = Math.floor(swTime / 3600).toString().padStart(2, '0');
-      const mins = Math.floor((swTime % 3600) / 60).toString().padStart(2, '0');
-      const secs = (swTime % 60).toString().padStart(2, '0');
-      document.getElementById('stopwatch-display').textContent = `${hrs}:${mins}:${secs}`;
+      const h = Math.floor(swTime / 3600).toString().padStart(2, '0');
+      const m = Math.floor((swTime % 3600) / 60).toString().padStart(2, '0');
+      const s = (swTime % 60).toString().padStart(2, '0');
+      document.getElementById('stopwatch-display').textContent = `${h}:${m}:${s}`;
     }
     
     function toggleStopwatch() {
@@ -278,10 +330,7 @@
         clearInterval(swInterval);
         document.getElementById('sw-start').textContent = 'Start';
       } else {
-        swInterval = setInterval(() => {
-          swTime++;
-          updateSwDisplay();
-        }, 1000);
+        swInterval = setInterval(() => { swTime++; updateSwDisplay(); }, 1000);
         document.getElementById('sw-start').textContent = 'Pause';
       }
       swRunning = !swRunning;
